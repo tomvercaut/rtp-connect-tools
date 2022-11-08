@@ -1,0 +1,13 @@
+[workspace]
+members = ["core"]
+
+[workspace.package]
+edition = "2021"
+version = "0.0.1"
+license = "MIT OR Apache-2.0"
+authors = ["Tom Vercauteren"]
+description = "An open-source, cross platform implementation of the Elekta RTPConnect interface specification."
+documentation = ""
+
+[workspace.dependencies]
+thiserror = "1.0"
