@@ -1,4 +1,4 @@
-use crate::model::{ExtendedPlan, Field, Plan, Prescription, Simulation, SiteSetup};
+use crate::model::{ExtendedField, ExtendedPlan, Field, Plan, Prescription, Simulation, SiteSetup};
 
 pub struct Rtp {
     pub plan: Plan,
@@ -7,6 +7,7 @@ pub struct Rtp {
     pub site_setup: SiteSetup,
     pub simulation: Simulation,
     pub fields: Vec<Field>,
+    pub extended_fields: Vec<ExtendedField>,
 }
 
 impl std::default::Default for Rtp {
@@ -18,6 +19,7 @@ impl std::default::Default for Rtp {
             site_setup: Default::default(),
             simulation: Default::default(),
             fields: vec![],
+            extended_fields: vec![],
         }
     }
 }

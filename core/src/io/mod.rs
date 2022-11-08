@@ -5,6 +5,7 @@ pub(crate) mod prescription;
 pub(crate) mod site_setup;
 pub(crate) mod simulation;
 pub(crate) mod field;
+pub(crate) mod extended_field;
 
 pub use parser::*;
 

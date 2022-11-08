@@ -1,7 +1,7 @@
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 use std::num::ParseIntError;
-use crate::io::{extended_plan, field, plan, prescription, simulation, site_setup};
+use crate::io::{extended_field, extended_plan, field, plan, prescription, simulation, site_setup};
 use crate::model::Rtp;
 
 #[derive(thiserror::Error, Debug)]
@@ -45,6 +45,9 @@ pub fn parse_file(filename: &str) -> Result<Rtp, Error> {
             },
             "FIELD_DEF" => {
                 rtp.fields.push(field::parse(&params)?);
+            },
+            "EXTENDED_FIELD_DEF" => {
+                rtp.extended_fields.push(extended_field::parse(&params)?);
             }
             _ => {}
         }
