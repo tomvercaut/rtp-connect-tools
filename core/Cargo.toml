@@ -1,0 +1,10 @@
+[package]
+name = "rtp-connect-tools-core"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description.workspace = true
+documentation.workspace = true
+
+[dependencies]
+thiserror = { workspace = true }
