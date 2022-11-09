@@ -1,7 +1,7 @@
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 use std::num::ParseIntError;
-use crate::io::{document_based_treatment_field, extended_field, extended_plan, field, plan, prescription, simulation, site_setup};
+use crate::io::{document_based_treatment_field, extended_field, extended_plan, field, multi_leaf_collimator, plan, prescription, simulation, site_setup};
 use crate::model::Rtp;
 
 #[derive(thiserror::Error, Debug)]
@@ -52,6 +52,10 @@ pub fn parse_file(filename: &str) -> Result<Rtp, Error> {
             "PDF_FIELD_DEF" => {
                 rtp.document_based_treatment_fields.push(document_based_treatment_field::parse(&params)?);
             }
+            ,
+            "MLC_DEF" => {
+                rtp.mlcs.push(multi_leaf_collimator::parse(&params)?);
+            },
             _ => {}
         }
     }

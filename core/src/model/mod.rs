@@ -7,6 +7,7 @@ mod simulation;
 mod field;
 mod extended_field;
 mod document_based_treatment_field;
+mod multi_leaf_collimator;
 
 pub use plan::Plan;
 pub use extended_plan::ExtendedPlan;
@@ -16,4 +17,5 @@ pub use simulation::Simulation;
 pub use field::Field;
 pub use extended_field::ExtendedField;
 pub use document_based_treatment_field::DocumentBasedTreatmentField;
+pub use multi_leaf_collimator::MultiLeafCollimator;
 pub use rtp::Rtp;
