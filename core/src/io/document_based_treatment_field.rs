@@ -1,5 +1,5 @@
 use crate::io::{Error, opt_f64, opt_u32};
-use crate::model::Field;
+use crate::model::DocumentBasedTreatmentField;
 
 #[repr(usize)]
 #[derive(Debug, Copy, Clone)]
@@ -10,8 +10,8 @@ enum Id {
     FieldId,
     FieldNote,
     FieldDose,
-    FieldMonitorUnits,
-    WedgeMonitorUnits,
+    PrimaryDosimeterUnits,
+    Meterset,
     TreatmentMachine,
     TreatmentType,
     Modality,
@@ -55,20 +55,23 @@ enum Id {
     IsocenterPositionX,
     IsocenterPositionY,
     IsocenterPositionZ,
+    OriginalPlanUid,
+    OriginalBeamNumber,
+    OriginalBeamName,
     Crc,
 }
 
-/// Parse the data elements from a Field from a set of RTP parameters.
+/// Parse the data elements from a Document Based Treatment Field from a set of RTP parameters.
 ///
 /// # Arguments
 ///
-/// * `params`: field record parameters
+/// * `params`: document based treatment field record parameters
 ///
-/// returns: Result<Field, Error>
-pub fn parse(params: &Vec<String>) -> Result<Field, Error> {
-    let mut field = Field::default();
-    let expected_length = 52;
-    let expected_keyword = "FIELD_DEF";
+/// returns: Result<DocumentBasedTreatmentField, Error>
+pub fn parse(params: &Vec<String>) -> Result<DocumentBasedTreatmentField, Error> {
+    let mut field = DocumentBasedTreatmentField::default();
+    let expected_length = 55;
+    let expected_keyword = "PDF_FIELD_DEF";
     if params.len() != expected_length {
         return Err(Error::ParameterLengthMismatch(expected_length, params.len()));
     }
@@ -80,8 +83,8 @@ pub fn parse(params: &Vec<String>) -> Result<Field, Error> {
     field.field_id = params[Id::FieldId as usize].to_string();
     field.field_note = params[Id::FieldNote as usize].to_string();
     field.field_dose = opt_f64(params[Id::FieldDose as usize].as_str());
-    field.field_monitor_units = opt_f64(params[Id::FieldMonitorUnits as usize].as_str());
-    field.wedge_monitor_units = opt_f64(params[Id::WedgeMonitorUnits as usize].as_str());
+    field.primary_dosimeter_units = params[Id::PrimaryDosimeterUnits as usize].to_string();
+    field.meterset = opt_f64(params[Id::Meterset as usize].as_str());
     field.treatment_machine = params[Id::TreatmentMachine as usize].to_string();
     field.treatment_type = params[Id::TreatmentType as usize].to_string();
     field.modality = params[Id::Modality as usize].to_string();
@@ -125,6 +128,9 @@ pub fn parse(params: &Vec<String>) -> Result<Field, Error> {
     field.isocenter_position_x = opt_f64(params[Id::IsocenterPositionX as usize].as_str());
     field.isocenter_position_y = opt_f64(params[Id::IsocenterPositionY as usize].as_str());
     field.isocenter_position_z = opt_f64(params[Id::IsocenterPositionZ as usize].as_str());
+    field.original_plan_uid = params[Id::OriginalPlanUid as usize].to_string();
+    field.original_beam_number = params[Id::OriginalBeamNumber as usize].to_string();
+    field.original_beam_name = params[Id::OriginalBeamName as usize].to_string();
     field.crc = (&params[Id::Crc as usize]).parse::<i32>()?;
     Ok(field)
 }
@@ -134,13 +140,13 @@ mod tests {
     #[test]
     fn parse() {
         let params = vec![
-            "FIELD_DEF".to_string(),
+            "PDF_FIELD_DEF".to_string(),
             "RxSiteName".to_string(),
             "FieldName".to_string(),
             "FieldId".to_string(),
             "FieldNote".to_string(),
             "6".to_string(),
-            "7".to_string(),
+            "PrimaryDosimeterUnits".to_string(),
             "8".to_string(),
             "TreatmentMachine".to_string(),
             "TreatmentType".to_string(),
@@ -185,6 +191,9 @@ mod tests {
             "49".to_string(),
             "50".to_string(),
             "51".to_string(),
+            "OriginalPlanUid".to_string(),
+            "OriginalBeamNumber".to_string(),
+            "OriginalBeamName".to_string(),
             "1234".to_string(),
         ];
         let res = super::parse(&params);
@@ -199,8 +208,8 @@ mod tests {
         assert_eq!(field.field_id , "FieldId".to_string());
         assert_eq!(field.field_note , "FieldNote".to_string());
         assert_eq!(field.field_dose , Some(6.0));
-        assert_eq!(field.field_monitor_units , Some(7.0));
-        assert_eq!(field.wedge_monitor_units , Some(8.0));
+        assert_eq!(field.primary_dosimeter_units , "PrimaryDosimeterUnits".to_string());
+        assert_eq!(field.meterset , Some(8.0));
         assert_eq!(field.treatment_machine , "TreatmentMachine".to_string());
         assert_eq!(field.treatment_type , "TreatmentType".to_string());
         assert_eq!(field.modality , "Modality".to_string());
@@ -244,6 +253,9 @@ mod tests {
         assert_eq!(field.isocenter_position_x , Some(49.0));
         assert_eq!(field.isocenter_position_y , Some(50.0));
         assert_eq!(field.isocenter_position_z , Some(51.0));
+        assert_eq!(field.original_plan_uid , "OriginalPlanUid".to_string());
+        assert_eq!(field.original_beam_number , "OriginalBeamNumber".to_string());
+        assert_eq!(field.original_beam_name , "OriginalBeamName".to_string());
         assert_eq!(field.crc , 1234);
 
     }

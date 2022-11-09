@@ -6,6 +6,7 @@ pub(crate) mod site_setup;
 pub(crate) mod simulation;
 pub(crate) mod field;
 pub(crate) mod extended_field;
+pub(crate) mod document_based_treatment_field;
 
 pub use parser::*;
 

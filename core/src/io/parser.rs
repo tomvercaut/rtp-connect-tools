@@ -1,7 +1,7 @@
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 use std::num::ParseIntError;
-use crate::io::{extended_field, extended_plan, field, plan, prescription, simulation, site_setup};
+use crate::io::{document_based_treatment_field, extended_field, extended_plan, field, plan, prescription, simulation, site_setup};
 use crate::model::Rtp;
 
 #[derive(thiserror::Error, Debug)]
@@ -30,24 +30,27 @@ pub fn parse_file(filename: &str) -> Result<Rtp, Error> {
         match keyword {
             "PLAN_DEF" => {
                 rtp.plan = plan::parse(&params)?;
-            },
+            }
             "EXTENDED_PLAN_DEF" => {
                 rtp.extended_plan = extended_plan::parse(&params)?;
-            },
+            }
             "RX_DEF" => {
                 rtp.prescription = prescription::parse(&params)?;
-            },
+            }
             "SITE_SETUP_DEF" => {
                 rtp.site_setup = site_setup::parse(&params)?;
-            },
+            }
             "SIM_DEF" => {
                 rtp.simulation = simulation::parse(&params)?;
-            },
+            }
             "FIELD_DEF" => {
                 rtp.fields.push(field::parse(&params)?);
-            },
+            }
             "EXTENDED_FIELD_DEF" => {
                 rtp.extended_fields.push(extended_field::parse(&params)?);
+            }
+            "PDF_FIELD_DEF" => {
+                rtp.document_based_treatment_fields.push(document_based_treatment_field::parse(&params)?);
             }
             _ => {}
         }
