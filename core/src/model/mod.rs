@@ -11,6 +11,7 @@ mod multi_leaf_collimator;
 mod control_point;
 mod rotation;
 mod mlc_shape;
+mod dose_tracking;
 
 pub use plan::Plan;
 pub use extended_plan::ExtendedPlan;
@@ -24,4 +25,5 @@ pub use multi_leaf_collimator::MultiLeafCollimator;
 pub use control_point::ControlPoint;
 pub use rotation::Rotation;
 pub use mlc_shape::MlcShape;
+pub use dose_tracking::DoseTracking;
 pub use rtp::Rtp;
