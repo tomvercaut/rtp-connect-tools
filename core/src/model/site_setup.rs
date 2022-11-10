@@ -26,7 +26,7 @@ pub struct SiteSetup {
     pub crc: i32,
 }
 
-impl std::default::Default for SiteSetup {
+impl Default for SiteSetup {
     fn default() -> Self {
         Self {
             rx_site_name: "".to_string(),

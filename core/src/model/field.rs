@@ -53,7 +53,7 @@ pub struct Field {
     pub crc: i32,
 }
 
-impl std::default::Default for Field {
+impl Default for Field {
     fn default() -> Self {
         Self {
             rx_site_name: "".to_string(),

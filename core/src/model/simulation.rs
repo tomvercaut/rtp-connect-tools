@@ -54,7 +54,7 @@ pub struct Simulation {
     pub crc: i32,
 }
 
-impl std::default::Default for Simulation {
+impl Default for Simulation {
     fn default() -> Self {
         Self {
             rx_site_name: "".to_string(),

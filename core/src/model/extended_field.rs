@@ -13,7 +13,7 @@ pub struct ExtendedField {
     pub crc: i32,
 }
 
-impl std::default::Default for ExtendedField {
+impl Default for ExtendedField {
     fn default() -> Self {
         Self {
             field_id: "".to_string(),

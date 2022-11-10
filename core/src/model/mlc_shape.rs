@@ -8,7 +8,7 @@ pub struct MlcShape {
     pub crc: i32,
 }
 
-impl std::default::Default for MlcShape {
+impl Default for MlcShape {
     fn default() -> Self {
         Self {
             field_id: "".to_string(),

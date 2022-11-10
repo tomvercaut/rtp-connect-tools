@@ -14,7 +14,7 @@ pub struct Prescription {
     pub crc: i32,
 }
 
-impl std::default::Default for Prescription {
+impl Default for Prescription {
     fn default() -> Self {
         Self {
             course_id: "".to_string(),

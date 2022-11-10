@@ -56,7 +56,7 @@ pub struct DocumentBasedTreatmentField {
     pub crc: i32,
 }
 
-impl std::default::Default for DocumentBasedTreatmentField {
+impl Default for DocumentBasedTreatmentField {
     fn default() -> Self {
         Self {
             rx_site_name: "".to_string(),

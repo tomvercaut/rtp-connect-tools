@@ -14,7 +14,7 @@ pub struct Rtp {
     pub mlc_shapes: Vec<MlcShape>,
 }
 
-impl std::default::Default for Rtp {
+impl Default for Rtp {
     fn default() -> Self {
         Self {
             plan: Default::default(),

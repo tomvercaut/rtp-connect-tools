@@ -30,7 +30,7 @@ pub struct Plan {
     pub crc: i32,
 }
 
-impl std::default::Default for Plan {
+impl Default for Plan {
     fn default() -> Self {
         Self {
             patient_id: "".to_string(),

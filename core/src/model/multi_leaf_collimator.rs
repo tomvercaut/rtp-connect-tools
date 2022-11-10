@@ -8,7 +8,7 @@ pub struct MultiLeafCollimator {
     pub crc: i32,
 }
 
-impl std::default::Default for MultiLeafCollimator {
+impl Default for MultiLeafCollimator {
     fn default() -> Self {
         Self {
             field_id: "".to_string(),

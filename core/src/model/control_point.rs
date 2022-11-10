@@ -41,7 +41,7 @@ pub struct ControlPoint {
     pub crc: i32,
 }
 
-impl std::default::Default for ControlPoint {
+impl Default for ControlPoint {
     fn default() -> Self {
         Self {
             field_id: "".to_string(),

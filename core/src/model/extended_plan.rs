@@ -6,7 +6,7 @@ pub struct ExtendedPlan {
     pub crc: i32,
 }
 
-impl std::default::Default for ExtendedPlan {
+impl Default for ExtendedPlan {
     fn default() -> Self {
         Self {
             encoding: "".to_string(),
