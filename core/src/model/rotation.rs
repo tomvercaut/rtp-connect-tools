@@ -1,8 +1,11 @@
 use std::str::FromStr;
 
+
 #[derive(PartialEq, Eq, Debug, Clone)]
 pub enum Rotation {
+    // Clockwise
     CW,
+    // Counterclockwise
     CC,
 }
 

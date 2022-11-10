@@ -16,6 +16,14 @@ pub enum Error {
     ParseIntError(#[from] ParseIntError),
 }
 
+
+/// Read an Elekta RTPConnect file and parse it into an RTP.
+///
+/// # Arguments
+///
+/// * `filename`: path to the RTPConnect file
+///
+/// returns: Result<Rtp, Error>
 pub fn parse_file(filename: &str) -> Result<Rtp, Error> {
     let mut rtp = Rtp::new();
     let file = File::open(filename)?;
