@@ -1,7 +1,7 @@
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 use std::num::ParseIntError;
-use crate::io::{control_point, document_based_treatment_field, extended_field, extended_plan, field, multi_leaf_collimator, plan, prescription, simulation, site_setup};
+use crate::io::{control_point, document_based_treatment_field, extended_field, extended_plan, field, multi_leaf_collimator, plan, prescription, simulation, site_setup, mlc_shape};
 use crate::model::Rtp;
 
 #[derive(thiserror::Error, Debug)]
@@ -57,6 +57,9 @@ pub fn parse_file(filename: &str) -> Result<Rtp, Error> {
             }
             "CONTROL_PT_DEF" => {
                 rtp.control_points.push(control_point::parse(&params)?);
+            }
+            "MLC_SHAP_DEF" => {
+                rtp.mlc_shapes.push(mlc_shape::parse(&params)?);
             }
             _ => {}
         }

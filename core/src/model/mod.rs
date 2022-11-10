@@ -10,6 +10,7 @@ mod document_based_treatment_field;
 mod multi_leaf_collimator;
 mod control_point;
 mod rotation;
+mod mlc_shape;
 
 pub use plan::Plan;
 pub use extended_plan::ExtendedPlan;
@@ -22,4 +23,5 @@ pub use document_based_treatment_field::DocumentBasedTreatmentField;
 pub use multi_leaf_collimator::MultiLeafCollimator;
 pub use control_point::ControlPoint;
 pub use rotation::Rotation;
+pub use mlc_shape::MlcShape;
 pub use rtp::Rtp;

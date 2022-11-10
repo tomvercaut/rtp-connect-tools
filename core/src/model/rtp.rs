@@ -1,4 +1,4 @@
-use crate::model::{ControlPoint, DocumentBasedTreatmentField, ExtendedField, ExtendedPlan, Field, MultiLeafCollimator, Plan, Prescription, Simulation, SiteSetup};
+use crate::model::{ControlPoint, DocumentBasedTreatmentField, ExtendedField, ExtendedPlan, Field, MlcShape, MultiLeafCollimator, Plan, Prescription, Simulation, SiteSetup};
 
 pub struct Rtp {
     pub plan: Plan,
@@ -11,6 +11,7 @@ pub struct Rtp {
     pub document_based_treatment_fields: Vec<DocumentBasedTreatmentField>,
     pub mlcs: Vec<MultiLeafCollimator>,
     pub control_points: Vec<ControlPoint>,
+    pub mlc_shapes: Vec<MlcShape>,
 }
 
 impl std::default::Default for Rtp {
@@ -26,6 +27,7 @@ impl std::default::Default for Rtp {
             document_based_treatment_fields: vec![],
             mlcs: vec![],
             control_points: vec![],
+            mlc_shapes: vec![],
         }
     }
 }
