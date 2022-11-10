@@ -1,7 +1,7 @@
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 use std::num::ParseIntError;
-use crate::io::{control_point, document_based_treatment_field, extended_field, extended_plan, field, multi_leaf_collimator, plan, prescription, simulation, site_setup, mlc_shape, dose_tracking};
+use crate::io::{control_point, document_based_treatment_field, extended_field, extended_plan, field, multi_leaf_collimator, plan, prescription, simulation, site_setup, mlc_shape, dose_tracking, dose_action};
 use crate::model::Rtp;
 
 #[derive(thiserror::Error, Debug)]
@@ -63,6 +63,9 @@ pub fn parse_file(filename: &str) -> Result<Rtp, Error> {
             }
             "DOSE_DEF" => {
                 rtp.dose_trackings.push(dose_tracking::parse(&params)?);
+            }
+            "DOSE_ACTION" => {
+                rtp.dose_actions.push(dose_action::parse(&params)?);
             }
             _ => {}
         }

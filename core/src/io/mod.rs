@@ -11,6 +11,7 @@ pub(crate) mod multi_leaf_collimator;
 pub(crate) mod control_point;
 pub(crate) mod mlc_shape;
 pub(crate) mod dose_tracking;
+pub(crate) mod dose_action;
 
 pub use parser::*;
 
